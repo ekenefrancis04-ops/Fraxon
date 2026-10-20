@@ -1,99 +1,291 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#080808">
-<meta name="description" content="FRAXON football match analysis and AI-powered prediction tools.">
+<meta name="description" content="FRAXON football intelligence, match analysis and AI-powered predictions.">
 <title>FRAXON ♾️ — Football Intelligence</title>
+
 <style>
 :root {
-  --bg:#080808; --panel:#111; --gold:#d9b45b;
-  --gold2:#f2d58a; --text:#f4f1e8; --muted:#aaa69a;
-  --line:#30291a; --danger:#ffb3a9; --success:#b8e6c1;
+  --bg:#080808;
+  --panel:#121212;
+  --panel2:#0d0d0d;
+  --gold:#d9b45b;
+  --gold-light:#f5dda0;
+  --text:#f5f2e9;
+  --muted:#aaa69b;
+  --line:#30291b;
+  --green:#8ee0a2;
+  --red:#ffaaa3;
 }
 * { box-sizing:border-box; }
 body {
-  margin:0; min-height:100vh; color:var(--text);
-  background:radial-gradient(ellipse at top,#211b0e 0,var(--bg) 44%);
-  font-family:system-ui,-apple-system,"Segoe UI",sans-serif; line-height:1.55;
+  margin:0;
+  min-height:100vh;
+  color:var(--text);
+  background:radial-gradient(ellipse at 50% 0,#211b0e 0,var(--bg) 48%);
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+  line-height:1.55;
 }
-header,main,footer { width:min(100% - 32px,1040px); margin:0 auto; }
+header,main,footer {
+  width:min(100% - 32px,1040px);
+  margin:auto;
+}
 header {
-  display:flex; align-items:center; justify-content:space-between;
-  gap:14px; padding:22px 0; border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  padding:22px 0;
+  border-bottom:1px solid var(--line);
 }
-.logo { font-size:1.22rem; font-weight:900; letter-spacing:1.8px; }
+.logo {
+  font-size:1.25rem;
+  font-weight:950;
+  letter-spacing:1.8px;
+}
 .logo span { color:var(--gold); }
 .status {
-  display:flex; align-items:center; gap:8px; color:var(--muted);
-  font-size:.78rem; border:1px solid var(--line);
-  border-radius:999px; padding:7px 11px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:var(--muted);
+  font-size:.76rem;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:7px 11px;
 }
-.dot { width:7px; height:7px; border-radius:50%; background:#888; }
-.dot.online { background:#74d58b; }
-.hero { padding:54px 0 30px; text-align:center; }
-.eyebrow { color:var(--gold); letter-spacing:3px; font-size:.72rem; font-weight:800; }
-h1 { margin:14px 0; font-size:clamp(2.4rem,8vw,4.6rem); line-height:1.02; letter-spacing:-2px; }
+.dot {
+  width:7px;
+  height:7px;
+  flex-shrink:0;
+  border-radius:50%;
+  background:#888;
+}
+.dot.online {
+  background:var(--green);
+  box-shadow:0 0 9px #8ee0a266;
+}
+.hero {
+  text-align:center;
+  padding:58px 0 30px;
+}
+.eyebrow {
+  color:var(--gold);
+  letter-spacing:3px;
+  font-size:.72rem;
+  font-weight:850;
+}
+h1 {
+  margin:14px 0;
+  font-size:clamp(2.5rem,8vw,4.7rem);
+  line-height:1.02;
+  letter-spacing:-2px;
+}
 h1 span { color:var(--gold); }
-.hero p { color:var(--muted); max-width:600px; margin:0 auto; }
-.tabs { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin:25px 0 16px; }
-.tab {
-  border:1px solid var(--line); color:var(--muted); background:#101010;
-  padding:11px 16px; border-radius:10px; cursor:pointer; font:inherit;
+.hero p {
+  max-width:600px;
+  margin:0 auto;
+  color:var(--muted);
 }
-.tab.active { color:#080808; background:var(--gold); border-color:var(--gold); font-weight:800; }
+.tabs {
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:25px 0 17px;
+}
+.tab {
+  border:1px solid var(--line);
+  color:var(--muted);
+  background:#101010;
+  padding:11px 16px;
+  border-radius:10px;
+  cursor:pointer;
+  font:inherit;
+}
+.tab.active {
+  color:#100d06;
+  background:var(--gold);
+  border-color:var(--gold);
+  font-weight:850;
+}
 .panel {
-  background:linear-gradient(145deg,#141414,#0e0e0e);
-  border:1px solid var(--line); border-radius:18px;
-  padding:clamp(18px,4vw,32px); margin:0 auto 22px;
+  background:linear-gradient(145deg,#151515,#0e0e0e);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:clamp(18px,4vw,30px);
+  margin:0 auto 22px;
 }
 h2 { margin:0 0 4px; font-size:1.45rem; }
 .small { color:var(--muted); font-size:.9rem; }
-label { display:block; font-size:.88rem; color:#ddd4bf; margin:18px 0 7px; font-weight:650; }
+label {
+  display:block;
+  color:#e1d8c4;
+  font-size:.88rem;
+  font-weight:700;
+  margin:18px 0 7px;
+}
 input,select {
-  width:100%; min-height:48px; border:1px solid #3a3427;
-  border-radius:10px; padding:12px 13px; color:var(--text);
-  background:#090909; font:inherit; outline:none;
+  width:100%;
+  min-height:49px;
+  border:1px solid #3a3427;
+  border-radius:10px;
+  padding:12px 13px;
+  color:var(--text);
+  background:#090909;
+  font:inherit;
+  outline:none;
 }
 input:focus,select:focus { border-color:var(--gold); }
-.fields { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-.primary {
-  width:100%; margin-top:22px; min-height:52px; border:0; border-radius:11px;
-  background:linear-gradient(100deg,var(--gold),var(--gold2));
-  color:#151109; font:inherit; font-weight:900; cursor:pointer;
+.fields {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
 }
+.primary {
+  width:100%;
+  margin-top:22px;
+  min-height:53px;
+  border:0;
+  border-radius:11px;
+  background:linear-gradient(100deg,var(--gold),var(--gold-light));
+  color:#151109;
+  font:inherit;
+  font-weight:950;
+  cursor:pointer;
+  transition:filter .2s,transform .2s;
+}
+.primary:hover { filter:brightness(1.08); }
+.primary:active { transform:scale(.99); }
 .primary:disabled { opacity:.6; cursor:wait; }
 .notice {
-  background:#17140e; border:1px solid var(--line); border-radius:10px;
-  padding:13px 14px; color:var(--muted); margin-top:16px;
-  font-size:.88rem; overflow-wrap:anywhere;
+  background:#17140e;
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:13px 14px;
+  color:var(--muted);
+  margin-top:16px;
+  font-size:.88rem;
+  overflow-wrap:anywhere;
 }
-.notice.error { color:var(--danger); border-color:#63342e; background:#21100e; }
-.notice.good { color:var(--success); }
-#result { display:none; margin-top:18px; padding:18px; }
-#message { margin:0 0 14px; overflow-wrap:anywhere; }
-.result-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
-.market { border:1px solid var(--line); background:#0a0a0a; border-radius:12px; padding:16px; min-width:0; }
-.market h3 { color:var(--gold); font-size:.83rem; text-transform:uppercase; letter-spacing:.7px; margin:0 0 9px; }
-.market .value { font-size:1.08rem; font-weight:750; overflow-wrap:anywhere; white-space:pre-wrap; }
-.empty { text-align:center; padding:30px 10px; }
+.notice.error {
+  color:var(--red);
+  border-color:#63342e;
+  background:#21100e;
+}
+.notice.good { color:var(--green); }
+#result { display:none; margin-top:20px; padding:0; overflow:hidden; }
+.result-heading {
+  padding:20px;
+  border-bottom:1px solid var(--line);
+  background:linear-gradient(110deg,#1d190f,#101010);
+}
+.result-heading h2 { color:var(--gold-light); }
+#message { margin:7px 0 0; overflow-wrap:anywhere; }
+#prediction-output {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  padding:14px;
+}
+.market {
+  border:1px solid var(--line);
+  background:var(--panel2);
+  border-radius:13px;
+  padding:17px;
+  min-width:0;
+}
+.market h3 {
+  margin:0 0 12px;
+  color:var(--muted);
+  font-size:.78rem;
+  font-weight:800;
+  letter-spacing:.7px;
+  text-transform:uppercase;
+}
+.market .pick {
+  color:var(--gold-light);
+  font-size:1.25rem;
+  font-weight:900;
+  line-height:1.3;
+  overflow-wrap:anywhere;
+}
+.market .confidence {
+  margin-top:7px;
+  color:var(--muted);
+  font-size:.82rem;
+}
+.probability-list {
+  display:grid;
+  gap:11px;
+  margin-top:17px;
+}
+.probability-row {
+  display:grid;
+  gap:5px;
+}
+.probability-top {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  font-size:.8rem;
+}
+.probability-top span:first-child { color:#d6d1c5; }
+.probability-top strong { color:var(--text); }
+.bar {
+  height:6px;
+  border-radius:99px;
+  background:#29261f;
+  overflow:hidden;
+}
+.bar-fill {
+  height:100%;
+  border-radius:99px;
+  background:linear-gradient(90deg,#a47c2d,var(--gold-light));
+}
+.disclaimer {
+  margin:0 14px 14px;
+  padding:12px;
+  color:var(--muted);
+  font-size:.78rem;
+  border-top:1px solid var(--line);
+}
+.empty {
+  text-align:center;
+  padding:30px 10px;
+}
 .symbol { color:var(--gold); font-size:2.5rem; }
-footer { text-align:center; padding:25px 0 35px; color:var(--muted); font-size:.83rem; }
+footer {
+  text-align:center;
+  padding:25px 0 35px;
+  color:var(--muted);
+  font-size:.83rem;
+}
+footer .logo { color:var(--text); }
 @media(max-width:620px) {
   header,main,footer { width:min(100% - 22px,1040px); }
   header { padding:17px 0; }
-  .fields,.result-grid { grid-template-columns:1fr; }
+  .status { font-size:.69rem; padding:6px 8px; }
+  .fields,#prediction-output { grid-template-columns:1fr; }
   .hero { padding-top:42px; }
   h1 { letter-spacing:-1.4px; }
   .tab { flex:1 1 auto; padding:10px 11px; }
 }
 </style>
 </head>
+
 <body>
 <header>
   <div class="logo">FRAXON <span>♾️</span></div>
-  <div class="status"><span id="status-dot" class="dot"></span><span id="api-status">Connecting...</span></div>
+  <div class="status">
+    <span id="status-dot" class="dot"></span>
+    <span id="api-status">Connecting...</span>
+  </div>
 </header>
 
 <main>
@@ -111,12 +303,12 @@ footer { text-align:center; padding:25px 0 35px; color:var(--muted); font-size:.
 
   <section id="predict" class="panel">
     <h2>⚽ Analyse a Match</h2>
-    <p class="small">Choose a competition and select team names from FRAXON's database.</p>
+    <p class="small">Select two teams from FRAXON's database to generate a match analysis.</p>
 
     <label for="league">Competition</label>
     <select id="league">
       <option>Premier League</option>
-      <option>La Liga</option>
+      <option selected>La Liga</option>
       <option>Serie A</option>
       <option>Bundesliga</option>
       <option>Ligue 1</option>
@@ -134,25 +326,29 @@ footer { text-align:center; padding:25px 0 35px; color:var(--muted); font-size:.
         <input id="away" list="team-options" placeholder="e.g. FC Barcelona" autocomplete="off">
       </div>
     </div>
-    <datalist id="team-options"></datalist>
 
+    <datalist id="team-options"></datalist>
     <button id="analyse-button" class="primary" type="button" onclick="analyse()">ANALYSE MATCH →</button>
 
-    <div id="result" class="panel">
-      <div id="message"></div>
-      <div id="prediction-output" class="result-grid"></div>
-    </div>
+    <section id="result" class="panel" aria-live="polite">
+      <div class="result-heading">
+        <h2>FRAXON Match Intelligence</h2>
+        <div id="message"></div>
+      </div>
+      <div id="prediction-output"></div>
+      <div class="disclaimer">Predictions are statistical estimates, not guarantees. Percentages reflect model outputs and do not guarantee match outcomes.</div>
+    </section>
 
-    <div class="notice">Predictions are estimates, not guarantees. The competition selector is currently for display; the API request uses the selected team names.</div>
+    <div class="notice">FRAXON uses historical team data to generate estimates. Competition selection currently labels the analysis; it does not filter the backend's match history.</div>
   </section>
 
   <section id="history" class="panel" style="display:none">
     <h2>📊 Match History</h2>
-    <p>FRAXON has historical match data loaded in its backend. A searchable match-history dashboard is a future feature and is not yet connected to this page.</p>
+    <p>FRAXON has historical match data loaded in its backend. A searchable match-history dashboard is not yet connected to this page.</p>
     <div class="empty">
       <div class="symbol">♾️</div>
       <strong>Historical data dashboard</strong>
-      <p class="small">Match records and model evaluation can be added here later.</p>
+      <p class="small">Match records and model evaluation can be added here in a future update.</p>
     </div>
   </section>
 
@@ -161,7 +357,7 @@ footer { text-align:center; padding:25px 0 35px; color:var(--muted); font-size:.
     <p>FRAXON is a sports intelligence project focused on football data, match analysis and machine-learning predictions.</p>
     <p><strong>Our goal</strong></p>
     <p>Make match data easier to understand and provide transparent analytical tools for sports fans.</p>
-    <div class="notice">Predictions are estimates, not guarantees. FRAXON does not guarantee betting profits or match outcomes.</div>
+    <div class="notice">FRAXON does not guarantee betting profits or match outcomes. Always make decisions responsibly.</div>
   </section>
 </main>
 
@@ -175,83 +371,163 @@ footer { text-align:center; padding:25px 0 35px; color:var(--muted); font-size:.
 const FRAXON_API = "https://fraxon-api.onrender.com";
 
 const MARKETS = [
-  {keys:["result","match_result","match result","1x2"], label:"Match Result"},
-  {keys:["over15","over_15","over 1.5","over1.5"], label:"Over 1.5 Goals"},
-  {keys:["over25","over_25","over 2.5","over2.5"], label:"Over 2.5 Goals"},
-  {keys:["btts","both_teams_to_score","both teams to score"], label:"Both Teams to Score"}
+  {key:"result", label:"Match Result"},
+  {key:"over15", label:"Over 1.5 Goals"},
+  {key:"over25", label:"Over 2.5 Goals"},
+  {key:"btts", label:"Both Teams to Score"}
 ];
 
-function normalizeKey(value) {
-  return String(value).toLowerCase().replace(/[\s_-]/g,"");
-}
-
-function showTab(id,button) {
+function showTab(id, button) {
   ["predict","history","about"].forEach(function(name) {
-    document.getElementById(name).style.display = name === id ? "block" : "none";
+    document.getElementById(name).style.display =
+      name === id ? "block" : "none";
   });
+
   document.querySelectorAll(".tab").forEach(function(tab) {
     tab.classList.remove("active");
   });
+
   button.classList.add("active");
 }
 
-function setApiStatus(text,online) {
+function setApiStatus(text, online) {
   document.getElementById("api-status").textContent = text;
-  document.getElementById("status-dot").classList.toggle("online",Boolean(online));
+  document.getElementById("status-dot").classList.toggle(
+    "online", Boolean(online)
+  );
 }
 
 async function loadTeams() {
   try {
     const response = await fetch(FRAXON_API + "/teams");
     if (!response.ok) throw new Error("Could not load teams");
+
     const data = await response.json();
     const teams = Array.isArray(data) ? data : data.teams;
-    if (!Array.isArray(teams)) throw new Error("Unexpected team-list format");
+
+    if (!Array.isArray(teams)) throw new Error("Invalid team list");
 
     const datalist = document.getElementById("team-options");
     datalist.replaceChildren();
+
     teams.forEach(function(team) {
       const option = document.createElement("option");
       option.value = team;
       datalist.appendChild(option);
     });
-    setApiStatus("Engine online · " + teams.length + " teams",true);
+
+    setApiStatus("Engine online · " + teams.length + " teams", true);
   } catch (error) {
-    setApiStatus("Engine connection issue",false);
+    setApiStatus("Engine connection issue", false);
   }
 }
 
-function labelFor(key) {
-  for (const market of MARKETS) {
-    if (market.keys.some(function(candidate) {
-      return normalizeKey(candidate) === normalizeKey(key);
-    })) return market.label;
-  }
-  return String(key).replace(/_/g," ").replace(/\b\w/g,function(ch) {
-    return ch.toUpperCase();
-  });
+function percent(value) {
+  const number = Number(value);
+  if (!Number.isFinite(number)) return "N/A";
+  return (number * 100).toFixed(2) + "%";
 }
 
-function printable(value) {
-  if (value === null || value === undefined) return "N/A";
-  if (typeof value === "object") {
-    if (Array.isArray(value)) return value.map(printable).join(" · ");
-    return Object.entries(value).map(function(entry) {
-      return labelFor(entry[0]) + ": " + printable(entry[1]);
-    }).join("\n");
-  }
-  return String(value);
+function marketLabel(key) {
+  const labels = {
+    "0": "No",
+    "1": "Yes",
+    "0.0": "No",
+    "1.0": "Yes"
+  };
+  return labels[String(key)] || String(key);
 }
 
-function addCard(container,title,value) {
+function outcomeLabel(key, value) {
+  const raw = String(value.label ?? value.class ?? "Unavailable");
+
+  if (key === "over15" || key === "over25" || key === "btts") {
+    if (raw === "1" || raw.toLowerCase() === "yes") return "Yes";
+    if (raw === "0" || raw.toLowerCase() === "no") return "No";
+  }
+
+  return raw;
+}
+
+function readableProbability(key, className) {
+  if (key === "over15") {
+    return String(className) === "1" ? "Over 1.5" : "Under 1.5";
+  }
+  if (key === "over25") {
+    return String(className) === "1" ? "Over 2.5" : "Under 2.5";
+  }
+  if (key === "btts") {
+    return String(className) === "1" ? "Yes" : "No";
+  }
+  return String(className);
+}
+
+function addProbability(container, label, value) {
+  const probability = Number(value);
+  if (!Number.isFinite(probability)) return;
+
+  const safeProbability = Math.max(0, Math.min(1, probability));
+
+  const row = document.createElement("div");
+  row.className = "probability-row";
+
+  const top = document.createElement("div");
+  top.className = "probability-top";
+
+  const name = document.createElement("span");
+  name.textContent = label;
+
+  const amount = document.createElement("strong");
+  amount.textContent = percent(safeProbability);
+
+  const bar = document.createElement("div");
+  bar.className = "bar";
+
+  const fill = document.createElement("div");
+  fill.className = "bar-fill";
+  fill.style.width = (safeProbability * 100) + "%";
+
+  top.append(name, amount);
+  bar.appendChild(fill);
+  row.append(top, bar);
+  container.appendChild(row);
+}
+
+function addMarketCard(container, market, prediction) {
   const card = document.createElement("article");
   card.className = "market";
+
   const heading = document.createElement("h3");
-  heading.textContent = title;
-  const body = document.createElement("div");
-  body.className = "value";
-  body.textContent = printable(value);
-  card.append(heading,body);
+  heading.textContent = market.label;
+
+  const pick = document.createElement("div");
+  pick.className = "pick";
+  pick.textContent = outcomeLabel(market.key, prediction);
+
+  card.append(heading, pick);
+
+  if (prediction.confidence !== undefined) {
+    const confidence = document.createElement("div");
+    confidence.className = "confidence";
+    confidence.textContent =
+      "Model confidence · " + percent(prediction.confidence);
+    card.appendChild(confidence);
+  }
+
+  const probabilities = prediction.probabilities;
+
+  if (probabilities && typeof probabilities === "object") {
+    const list = document.createElement("div");
+    list.className = "probability-list";
+
+    Object.entries(probabilities).forEach(function(entry) {
+      const label = readableProbability(market.key, entry[0]);
+      addProbability(list, label, entry[1]);
+    });
+
+    if (list.children.length) card.appendChild(list);
+  }
+
   container.appendChild(card);
 }
 
@@ -259,37 +535,26 @@ function renderPredictions(data) {
   const output = document.getElementById("prediction-output");
   output.replaceChildren();
 
-  const payload = data && typeof data === "object" && !Array.isArray(data)
-    ? data : {prediction:data};
-  const predictions = payload.predictions && typeof payload.predictions === "object"
-    ? payload.predictions : payload;
+  const predictions = data && data.predictions;
+  let rendered = 0;
 
-  let count = 0;
-  MARKETS.forEach(function(market) {
-    const key = Object.keys(predictions).find(function(candidate) {
-      return market.keys.some(function(alias) {
-        return normalizeKey(alias) === normalizeKey(candidate);
-      });
+  if (predictions && typeof predictions === "object") {
+    MARKETS.forEach(function(market) {
+      const prediction = predictions[market.key];
+      if (prediction && typeof prediction === "object") {
+        addMarketCard(output, market, prediction);
+        rendered++;
+      }
     });
-    if (key !== undefined) {
-      addCard(output,market.label,predictions[key]);
-      count++;
-    }
-  });
+  }
 
-  const known = new Set(MARKETS.flatMap(function(market) {
-    return market.keys.map(normalizeKey);
-  }));
-  const excluded = new Set(["home_team","away_team","home","away","predictions","message","status"]);
-
-  Object.entries(predictions).forEach(function(entry) {
-    if (!known.has(normalizeKey(entry[0])) && !excluded.has(entry[0].toLowerCase())) {
-      addCard(output,labelFor(entry[0]),entry[1]);
-      count++;
-    }
-  });
-
-  if (!count) addCard(output,"API response",JSON.stringify(data,null,2));
+  if (!rendered) {
+    const message = document.createElement("div");
+    message.className = "notice error";
+    message.textContent =
+      "The API responded, but its prediction format was unexpected. Please contact support or check the API response.";
+    output.appendChild(message);
+  }
 }
 
 async function analyse() {
@@ -298,58 +563,65 @@ async function analyse() {
   const league = document.getElementById("league").value;
   const result = document.getElementById("result");
   const message = document.getElementById("message");
-  const output = document.getElementById("prediction-output");
   const button = document.getElementById("analyse-button");
+  const output = document.getElementById("prediction-output");
 
   result.style.display = "block";
-  message.className = "";
+  message.className = "small";
   output.replaceChildren();
 
   if (!home || !away) {
     message.className = "notice error";
-    message.textContent = "Please enter both the home team and the away team.";
+    message.textContent = "Please enter both teams.";
     return;
   }
 
   if (home.toLowerCase() === away.toLowerCase()) {
     message.className = "notice error";
-    message.textContent = "Please choose two different teams.";
+    message.textContent = "Please select two different teams.";
     return;
   }
 
   button.disabled = true;
   button.textContent = "ANALYSING MATCH...";
-  message.className = "notice";
-  message.textContent = "Connecting to FRAXON. The first request may take longer if the service is waking up.";
+  message.textContent =
+    "Connecting to FRAXON. The first request may take longer if the service is waking up.";
 
   try {
     const response = await fetch(FRAXON_API + "/predict", {
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({home_team:home,away_team:away})
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        home_team: home,
+        away_team: away
+      })
     });
 
     const raw = await response.text();
     let data;
+
     try {
       data = JSON.parse(raw);
     } catch (_) {
-      data = {response:raw || "The API returned an empty response."};
+      data = {detail: raw || "The API returned an empty response."};
     }
 
     if (!response.ok) {
-      const detail = data && (data.detail || data.message || data.error);
-      throw new Error(typeof detail === "string" ? detail : JSON.stringify(detail || data));
+      const detail = data.detail || data.message || "Analysis failed.";
+      throw new Error(
+        typeof detail === "string" ? detail : JSON.stringify(detail)
+      );
     }
 
-    message.className = "notice good";
+    message.className = "small";
     message.textContent = home + " vs " + away + " · " + league;
     renderPredictions(data);
   } catch (error) {
     message.className = "notice error";
-    message.textContent = error.message === "Failed to fetch"
-      ? "FRAXON could not reach the API. The server may be waking up, or its CORS settings may need to allow this website."
-      : "Analysis could not be completed: " + error.message;
+    message.textContent =
+      error.message === "Failed to fetch"
+        ? "FRAXON could not reach the API. Please check your connection and try again."
+        : "Analysis could not be completed: " + error.message;
   } finally {
     button.disabled = false;
     button.textContent = "ANALYSE MATCH →";
