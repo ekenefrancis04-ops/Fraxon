@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FRAXON ♾️ | Sports Intelligence</title>
+<meta name="description" content="FRAXON — AI-powered football predictions and match analysis.">
+<style>
+:root {
+  --gold: #f5bd42;
+  --bg: #080a0e;
+  --panel: #11151c;
+  --muted: #929baa;
+  --line: #272c35;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: #f5f6fa;
+  font-family: Arial, sans-serif;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 6%;
+  border-bottom: 1px solid var(--line);
+}
+.logo { font-size: 25px; font-weight: 900; letter-spacing: 2px; }
+.logo span { color: var(--gold); }
+.status {
+  color: var(--gold);
+  border: 1px solid #594720;
+  border-radius: 30px;
+  padding: 7px 12px;
+  font-size: 11px;
+}
+main { max-width: 1050px; margin: auto; padding: 35px 18px 60px; }
+.hero { margin: 20px 0 32px; }
+.eyebrow {
+  color: var(--gold);
+  font-size: 12px;
+  letter-spacing: 3px;
+  font-weight: bold;
+}
+h1 { font-size: clamp(35px, 7vw, 58px); margin: 13px 0; }
+h1 span { color: var(--gold); }
+p { color: var(--muted); line-height: 1.65; }
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 23px;
+  margin-bottom: 20px;
+}
+h2 { font-size: 19px; margin: 0 0 8px; }
+label { display: block; font-size: 12px; color: var(--muted); margin: 16px 0 8px; }
+input, select {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #303641;
+  border-radius: 9px;
+  background: #0a0d12;
+  color: white;
+  font-size: 15px;
+}
+.fields { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+button {
+  cursor: pointer;
+  border: 0;
+  border-radius: 9px;
+  padding: 14px 18px;
+  font-weight: bold;
+  font-size: 14px;
+}
+.primary { background: var(--gold); color: #15110a; width: 100%; margin-top: 20px; }
+.primary:hover { background: #ffd46f; }
+.tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+.tab {
+  color: var(--muted);
+  background: var(--panel);
+  border: 1px solid var(--line);
+}
+.tab.active { color: var(--gold); border-color: var(--gold); }
+.notice {
+  border-left: 3px solid var(--gold);
+  background: #17150f;
+  padding: 13px 15px;
+  color: #d5c7a4;
+  font-size: 13px;
+  line-height: 1.6;
+  margin-top: 20px;
+}
+.result { display: none; }
+.empty {
+  text-align: center;
+  padding: 25px 10px;
+  color: var(--muted);
+}
+.symbol { color: var(--gold); font-size: 42px; margin-bottom: 10px; }
+footer {
+  border-top: 1px solid var(--line);
+  padding: 25px 15px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+}
+.small { font-size: 12px; }
+@media (max-width: 550px) {
+  header { padding: 17px 5%; }
+  .logo { font-size: 21px; }
+  main { padding: 25px 13px 45px; }
+  .panel { padding: 18px; }
+  .fields { grid-template-columns: 1fr; gap: 0; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">FRAXON <span>♾️</span></div>
+  <div class="status">SPORTS INTELLIGENCE</div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="eyebrow">DATA. INTELLIGENCE. PERFORMANCE.</div>
+    <h1>See the game<br><span>differently.</span></h1>
+    <p>Football match analysis and AI-powered prediction tools, built to help you understand the game through data.</p>
+  </section>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('predict',this)">Match Analysis</button>
+    <button class="tab" onclick="showTab('history',this)">Match History</button>
+    <button class="tab" onclick="showTab('about',this)">About FRAXON</button>
+  </div>
+
+  <section id="predict" class="panel">
+    <h2>⚽ Analyse a Match</h2>
+    <p class="small">Choose a competition and enter the two teams.</p>
+
+    <label for="league">Competition</label>
+    <select id="league">
+      <option>Premier League</option>
+      <option>La Liga</option>
+      <option>Serie A</option>
+      <option>Bundesliga</option>
+      <option>Ligue 1</option>
+      <option>UEFA Champions League</option>
+      <option>Other competition</option>
+    </select>
+
+    <div class="fields">
+      <div>
+        <label for="home">Home team</label>
+        <input id="home" placeholder="e.g. Real Madrid">
+      </div>
+      <div>
+        <label for="away">Away team</label>
+        <input id="away" placeholder="e.g. Barcelona">
+      </div>
+    </div>
+
+    <button class="primary" onclick="analyse()">ANALYSE MATCH →</button>
+
+    <div id="result" class="result">
+      <div class="notice" id="message"></div>
+    </div>
+
+    <div class="notice">
+      Prediction engine connection is the next stage. No probabilities or match predictions are presented as verified until the FRAXON models are connected.
+    </div>
+  </section>
+
+  <section id="history" class="panel" style="display:none">
+    <h2>📊 Match History</h2>
+    <p>Your historical match database will appear here once connected to the FRAXON data files.</p>
+    <div class="empty">
+      <div class="symbol">♾️</div>
+      <strong>Historical data integration pending</strong>
+      <p class="small">Past results and model performance will be displayed here.</p>
+    </div>
+  </section>
+
+  <section id="about" class="panel" style="display:none">
+    <h2>About FRAXON ♾️</h2>
+    <p>FRAXON is a sports intelligence project focused on football data, match analysis and machine-learning predictions.</p>
+    <p><strong>Our goal</strong></p>
+    <p>Make match data easier to understand and provide transparent analytical tools for sports fans.</p>
+    <div class="notice">
+      Predictions are estimates, not guarantees. FRAXON does not guarantee betting profits or match outcomes.
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="logo">FRAXON <span>♾️</span></div>
+  <p>Built for a deeper understanding of the game.</p>
+  <div>© 2026 FRAXON. All rights reserved.</div>
+</footer>
+
+<script>
+function showTab(id, button) {
+  ['predict', 'history', 'about'].forEach(function(name) {
+    document.getElementById(name).style.display =
+      name === id ? 'block' : 'none';
+  });
+  document.querySelectorAll('.tab').forEach(function(tab) {
+    tab.classList.remove('active');
+  });
+  button.classList.add('active');
+}
+
+function analyse() {
+  const home = document.getElementById('home').value.trim();
+  const away = document.getElementById('away').value.trim();
+  const league = document.getElementById('league').value;
+  const result = document.getElementById('result');
+  const message = document.getElementById('message');
+
+  result.style.display = 'block';
+
+  if (!home || !away) {
+    message.textContent = 'Please enter both the home team and the away team.';
+    return;
+  }
+
+  if (home.toLowerCase() === away.toLowerCase()) {
+    message.textContent = 'Please choose two different teams.';
+    return;
+  }
+
+  message.textContent =
+    'Match selected: ' + home + ' vs ' + away + ' (' + league +
+    '). The FRAXON prediction engine must be connected before real model predictions can be generated.';
+}
+</script>
+
+</body>
+</html>
